@@ -1,0 +1,128 @@
+﻿@using DreamsHub.Models
+@using DreamsHub.Models.Tipos
+@model DreamsHub.ViewModels.TransacaoViewModel
+
+<div class="responsive-table">
+    <table class="table invoice-data-table white border-radius-4 pt-1">
+        <thead>
+        <tr>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Data</th>
+            <th>Categoria</th>
+            <th>Tipo</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        @foreach (Transacao item in Model.Transacoes)
+        {
+            <tr>
+                <td>@item.Descricao</td>
+                <td>@item.Valor.ToString("C")</td>
+                <td>@item.Data.ToString("dd/MM")</td>
+                <td>
+                    <span class="bullet blue"></span>
+                    <span>@item.Categoria.Descricao</span>
+                </td>
+                <td>
+                    @if (item.Status == EStatusTransacao.Efetuado)
+                    {
+                        <span class="chip lighten-5 green green-text">Efetuado</span>
+                    }
+                    else if (item.Status == EStatusTransacao.Pendente)
+                    {
+                        <span class="chip lighten-5 red red-text">Pendente</span>
+                    }
+                </td>
+            </tr>
+        }
+
+        @* @foreach (DtoOrcamento item in Model.Orcamentos.OrderByDescending(l => l.Data)) *@
+        @* { *@
+        @*     <tr> *@
+        @*         <td> *@
+        @*             <a href="#">@item.Cliente.Nome</a> *@
+        @*         </td> *@
+        @*         <td>@item.ValorTotal.ToString("C")</td> *@
+        @*         <td>@item.Cliente.Contato</td> *@
+        @*         <td> *@
+        @*             @item.Data.ToString(@"dd/MM/yyyy") *@
+        @*         </td> *@
+        @*         <td class="center"> *@
+        @*             @if (item.TipoPagamento == "dinheiro") *@
+        @*             { *@
+        @*                 <span class="bullet teal"></span> *@
+        @*                 <span>Dinheiro</span> *@
+        @*             } *@
+        @*             else if (item.TipoPagamento == "debito") *@
+        @*             { *@
+        @*                 <span class="bullet blue"></span> *@
+        @*                 <span>Débito</span> *@
+        @*             } *@
+        @*             else *@
+        @*             { *@
+        @*                 <span class="bullet red"></span> *@
+        @*                 <span>Crédito</span> *@
+        @*             } *@
+        @*         </td> *@
+        @*         <td> *@
+        @*             @if (item.Status == EStatusOrcamento.Andamento) *@
+        @*             { *@
+        @*                 <span class="chip lighten-5 blue blue-text">Andamento</span> *@
+        @*             } *@
+        @*             else if (item.Status == EStatusOrcamento.Concluido) *@
+        @*             { *@
+        @*                 <span class="chip lighten-5 green green-text">Concluído</span> *@
+        @*             }else if (item.Status == EStatusOrcamento.Cancelado) *@
+        @*             { *@
+        @*                 <span class="chip lighten-5 red red-text">Cancelado</span> *@
+        @*             } *@
+        @*         </td> *@
+        @*         <td> *@
+        @*             <div class="invoice-action"> *@
+        @*                 <a href="@Url.Action("Visualizar", new {codigo = item.Id})"  *@
+        @*                    class="mr-4 tooltipped" data-position="top" data-tooltip="Imprimir"> *@
+        @*                     <i class="material-icons">assignment</i> *@
+        @*                 </a> *@
+        @*                  *@
+        @*                 @if (item.Status == EStatusOrcamento.Andamento) *@
+        @*                 { *@
+        @*                     <a href="@Url.Action("Create", new {codigo = item.Id})"  *@
+        @*                        class="orange-text tooltipped" data-position="top" data-tooltip="Editar"> *@
+        @*                         <i class="material-icons">edit</i> *@
+        @*                     </a> *@
+        @*                     <a class="mr-4 green-text tooltipped button-concluir-orcamento cursor-pointer"  *@
+        @*                        data-position="top" data-tooltip="Concluir" data-codigo="@item.Id"> *@
+        @*                         <i class="material-icons">playlist_add_check</i> *@
+        @*                     </a> *@
+        @*                     <a class="mr-4 red-text tooltipped button-cancelar-orcamento cursor-pointer"  *@
+        @*                        data-position="top" data-tooltip="Cancelar" data-codigo="@item.Id"> *@
+        @*                         <i class="material-icons">delete_sweep</i> *@
+        @*                     </a> *@
+        @*                 } *@
+        @*                 else *@
+        @*                 { *@
+        @*                     <a class="mr-4 orange-text tooltipped button-reiniciar-orcamento cursor-pointer"  *@
+        @*                        data-position="top" data-tooltip="Voltar para Andamento" data-codigo="@item.Id"> *@
+        @*                         <i class="material-icons">settings_backup_restore</i> *@
+        @*                     </a> *@
+        @*                 } *@
+        @*                  *@
+        @*                  *@
+        @*             </div> *@
+        @*         </td> *@
+        @*     </tr> *@
+        @* } *@
+
+        @* @if (Model.Orcamentos.Count == 0) *@
+        @* { *@
+        @*     <tr> *@
+        @*         <td colspan="7" class="center">Nenhum Registro encontrado</td> *@
+        @*     </tr> *@
+        @* } *@
+
+        </tbody>
+    </table>
+</div>

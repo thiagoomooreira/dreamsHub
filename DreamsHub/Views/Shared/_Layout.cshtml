@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreams Hub</title>
+
+    <link rel="apple-touch-icon" href="~/Materialize/app-assets/images/favicon/apple-touch-icon-152x152.png">
+    <link rel="shortcut icon" type="image/x-icon" href="~/Materialize/app-assets/images/favicon/Oapple-touch-icon-152x152.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- BEGIN: VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="~/Materialize/app-assets/vendors/vendors.min.css">
+
+    <link rel="stylesheet" type="text/css" href="~/Materialize/app-assets/vendors/data-tables/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Materialize/app-assets/vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Materialize/app-assets/vendors/sweetalert/css/text.css">
+
+
+    <!-- END: VENDOR CSS-->
+    <!-- BEGIN: Page Level CSS-->
+    <link rel="stylesheet" type="text/css" href="~/Materialize/app-assets/css/themes/vertical-dark-menu-template/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Materialize/app-assets/css/themes/vertical-dark-menu-template/style.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Materialize/app-assets/css/pages/page-users.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Materialize/app-assets/css/pages/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="~/Materialize/app-assets/css/pages/charts-sparkline.css">
+    <link rel="stylesheet" type="text/css" href="~/css/CustomSite.css"/>
+    <!-- END: Page Level CSS-->
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="~/Materialize/app-assets/css/custom/custom.css">
+    <!-- END: Custom CSS-->
+
+
+    <!-- BEGIN VENDOR JS-->
+    <script src="~/Materialize/app-assets/js/vendors.min.js"></script>
+    <!-- BEGIN VENDOR JS-->
+
+    <script src="~/Materialize/app-assets/vendors/formatter/jquery.formatter.min.js"></script>
+    <script src="~/Materialize/app-assets/vendors/sweetalert/sweetalert.min.js"></script>
+    
+    <!-- BEGIN THEME  JS-->
+    <script src="~/Materialize/app-assets/js/plugins.min.js"></script>
+    <script src="~/Materialize/app-assets/js/search.min.js"></script>
+    <script src="~/Materialize/app-assets/js/custom/custom-script.min.js"></script>
+    <script src="~/Materialize/app-assets/js/scripts/customizer.min.js"></script>
+    <script src="~/Materialize/app-assets/js/scripts/form-masks.js"></script>
+    <script src="~/Materialize/app-assets/js/scripts/extra-components-sweetalert.min.js"></script>
+    <!-- END THEME  JS-->
+
+    <style>
+        .progress {
+            left: 16px !important;
+            margin: 0 !important; 
+            background-color: #c5ecfe;
+        }
+    </style>
+</head>
+<body>
+<!-- BEGIN: Header-->
+<header class="page-topbar" id="header">
+    <div class="navbar navbar-fixed">
+        <nav class="navbar-main nav-collapsible sideNav-lock gradient-45deg-indigo-blue">
+            <div class="nav-wrapper">
+                 <a href="#" class="brand-logo pl-5" style="font-size: 20px">Dreams Hub</a>
+                @* <ul class="navbar-list right"> *@
+                @*     <li> *@
+                @*         <a href="@Url.Action("Logoff", "Login")"><i class="material-icons">exit_to_app</i> Sair</a> *@
+                @*     </li> *@
+                @* </ul> *@
+            </div>
+            <div class="progress hide" id="loading-progress">
+                <div class="indeterminate"></div>
+            </div>
+        </nav>
+    </div>
+    
+</header>
+<!-- END: Header-->
+
+<!-- BEGIN: SideNav-->
+<aside class="sidenav-main nav-collapsible sidenav-dark nav-collapsed">
+    <div class="brand-sidebar">
+        <h1 class="logo-wrapper">
+            <a class="brand-logo darken-1" href="@Url.Action("Index", "Home")">
+                <i class="material-icons">business</i>
+                <span class="logo-text hide-on-med-and-down">Marmoraria </span>
+            </a>
+        </h1>
+    </div>
+    <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow" id="slide-out" data-menu="menu-navigation" data-collapsible="menu-accordion">
+        <li class="bold">
+            <a class="waves-effect waves-cyan " href="@Url.Action("Index", "Transacao")">
+                <i class="material-icons">assignment</i><span class="menu-title">Transações</span>
+            </a>
+        </li>
+    </ul>
+    <div class="navigation-background"></div>
+    <a class="sidenav-trigger btn-sidenav-toggle btn-floating btn-medium waves-effect waves-light hide-on-large-only" href="#" data-target="slide-out">
+        <i class="material-icons">menu</i>
+    </a>
+</aside>
+
+
+
+<div id="main" class="main-full">
+    @RenderBody()
+</div>
+
+<script src="~/Js/Infra/CustomAjax.js"></script>
+<script src="~/Js/Infra/ViewResponse.js"></script>
+<script>
+    // $(document).on(function () {
+    //     Startload();
+    // });
+    
+    $(".load").bind("click", function () {
+        Startload();
+    });
+    
+    $(document).ajaxStart(function () {
+        Startload();
+    });
+    
+    $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
+        HelperSwal.Error("Oops...", "Ocorreu um erro interno no sistema, tente novamente!");
+    
+        Closeload();
+    });
+    
+    $("body").bind("load", function () {
+        Closeload();
+    });
+    
+    $(document).ajaxComplete(function () {
+        if ($.active <= 1) {
+            Closeload();
+        }
+    });
+    
+    window.onbeforeunload = function () {
+        Startload();
+    };
+    
+    function Startload() {
+        $("#loading-progress").removeClass("hide");
+       
+    }
+    
+    function Closeload() {
+        $("#loading-progress").addClass("hide");
+    }
+</script>
+
+</body>
+</html>
