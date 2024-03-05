@@ -1,0 +1,79 @@
+﻿@model DreamsHub.ViewModels.AdicionarTransacaoViewModel
+
+<div id="modal-adicionar-transacao" class="modal modal-fixed-footer">
+    @using (Html.BeginForm("Salvar", "Transacao", FormMethod.Get, 
+                new { id = "form-transacao" }))
+            {
+        <div class="modal-content">
+            <h4>Transação</h4>
+
+
+            @Html.HiddenFor(l => l.Transacao.Id)
+            @Html.HiddenFor(l => l.Transacao.Tipo)
+
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">attach_money</i>
+                    @Html.TextBoxFor(l => l.Transacao.Valor,
+                        new { @class = "validate" })
+                    @Html.LabelFor(l => l.Transacao.Valor, "Valor")
+                </div>
+
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">date_range</i>
+                    @Html.TextBoxFor(l => l.Transacao.Data,
+                        new { @class = "", type = "date" })
+                    @Html.LabelFor(l => l.Transacao.Data, "Data")
+                </div>
+
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">description</i>
+                    @Html.TextBoxFor(l => l.Transacao.Descricao,
+                        new { @class = "validate" })
+                    @Html.LabelFor(l => l.Transacao.Descricao, "Descrição")
+                </div>
+                <div class="input-field col s4">
+                    <i class="material-icons prefix">mode_edit</i>
+                    @Html.DropDownListFor(l => l.Transacao.Categoria,
+                        Model.CategoriasDropdown())
+                    @Html.LabelFor(l => l.Transacao.Categoria,
+                        "Categoria")
+                </div>
+                <div class="switch col s4" style="margin-top: 16px">
+                    <label>
+                        Pendente
+                        <input type="checkbox" id="campo-status" value="true" name="Transacao.Status">
+                        <span class="lever"></span>
+                        Pago
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="modal-action waves-effect waves-green btn-flat">Salvar</button>
+        </div>
+    }
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('select').formSelect();
+        $('.datepicker').datepicker();
+        
+        $("#form-transacao").submit(async function (e){
+            e.preventDefault()
+            
+            const response = new ViewResponse(await new CustomAjax({
+                type: "POST",
+                url: "/Transacao/Salvar",
+                data: $(this).serializeArray()
+            }).Start());
+    
+            if(response.Status()){
+                $(`#modal-adicionar-transacao`).modal('close');
+            }else{
+                response.Swal()
+            }  
+        })
+      });
+</script>

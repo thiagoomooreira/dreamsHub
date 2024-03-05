@@ -1,9 +1,24 @@
-var builder = WebApplication.CreateBuilder(args);
+using DreamsHub.Context;
+using DreamsHub.Dao;
+using DreamsHub.Dao.Interface;
+using DreamsHub.Models.Infra.ControllerComponent;
+using DreamsHub.Repository;
+using DreamsHub.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
+
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-var app = builder.Build();
+var connectionString = builder.Configuration.GetConnectionString("AppDb");
+builder.Services.AddDbContext<ContextModel>(x => x.UseSqlServer(connectionString));
+
+builder.Services.AddTransient<IViewRenderService, ViewRenderService>();
+builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
+builder.Services.AddTransient<ITransacaoRepository, TransacaoRepository>();
+
+WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

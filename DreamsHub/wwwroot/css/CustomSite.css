@@ -1,0 +1,38 @@
+html{
+  color: black;
+  font-size: 16px;
+}
+
+.card{
+  border-radius: 20px;
+}
+.card-content{
+  background-color: #f5f5f5;
+  border-radius: 20px !important;
+}
+
+.table{
+  background-color: #f5f5f5 !important;
+}
+
+.table th{color: #212121   !important;font-weight: bold}
+.table td{color: #424242  !important;}
+
+
+.card-title-page{
+  background-color: #424242 ;
+  border-radius: 20px;
+  padding: 20px !important;
+  margin-top: 10px;
+}
+
+.card-title-page h4{
+  color: white !important;
+}
+.card-title-page span{
+  color: #f5f5f5;
+}
+
+
+.btn-floating, .btn{background-color: #212121 !important;}
+.fixed-action-btn{bottom: 50px; right: 19px;}

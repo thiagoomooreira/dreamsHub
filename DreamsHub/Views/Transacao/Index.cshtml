@@ -3,28 +3,43 @@
 <link rel="stylesheet" type="text/css" href="~/Materialize/app-assets/css/pages/app-invoice.min.css">
 
 <div class="row">
-    <div class="content-wrapper-before gradient-45deg-indigo-blue"></div>
+    <div class="content-wrapper-before white"></div>
     <div class="col s12">
         <div class="container">
-            <div class="row">
-                <div class="col s9 mt-3 mb-0">
-                    <h4 class="white-text">Transações</h4>
-                    <span class="grey-text">Home -> Transação</span>
+            <div class="row ">
+                <div class="col s4 card-title-page">
+                    <h4 class="bold">Transações</h4>
+                    <span>Home -> Transação</span>
                 </div>
             </div>
             <div class="row">
-                <div class="fixed-action-btn">
+                <div class="fixed-action-btn direction-top">
                     <a class="btn-floating btn-large">
-                        <i class="large material-icons">playlist_add</i>
+                        <i class="material-icons">add</i>
                     </a>
+                    <ul>
+                        <li>
+                            <a class="btn-floating green" style="opacity: 0; transform: scale(1) translateY(40px) translateX(0px);">
+                                <i class="material-icons">attach_money</i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="btn-floating blue"
+                               id="button-adicionar-despesa"
+                               style="opacity: 0; transform: scale(1) translateY(40px) translateX(0px);">
+                                <i class="material-icons">receipt</i>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
+
                 <!-- invoice list -->
                 <section class="invoice-list-wrapper section mt-0">
-                    <div class="card">
-                        <div class="card-content pt-2">
-                            <h4>Filtro</h4>
-                        </div>
-                    </div>
+                    @* <div class="card"> *@
+                    @*     <div class="card-content pt-2 "> *@
+                    @*         <h4>Filtro</h4> *@
+                    @*     </div> *@
+                    @* </div> *@
                     <div class="card">
                         <div class="card-content">
                             <div id="div-tabela-orcamento">
@@ -38,6 +53,15 @@
     </div>
 </div>
 
+<div id="div-modal-adicionar-transacao"></div>
+
 <script src="~/Materialize/app-assets/vendors/data-tables/js/jquery.dataTables.min.js"></script>
 <script src="~/Materialize/app-assets/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js"></script>
 <script src="~/Materialize/app-assets/vendors/data-tables/js/datatables.checkboxes.min.js"></script>
+<script src="~/js/views/transacao/AdicionarTransacao.js"></script>
+
+<script>
+    $(document).ready(function (){
+        new AdicionarTransacao()
+    })
+</script>

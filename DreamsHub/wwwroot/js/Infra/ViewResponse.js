@@ -1,12 +1,13 @@
 ﻿class ViewResponse{
     constructor(response) {
-        this._status = response.Status;
-        this._titulo = response.Titulo;
-        this._mensagem = response.Mensagem;
-        this._view = response.View;
-        this._functionJs = response.FunctionJs;
-        this._content = response.Content;
+        this._status = response.status;
+        this._titulo = response.titulo;
+        this._mensagem = response.mensagem;
+        this._view = response.view;
+        this._functionJs = response.functionJs;
+        this._content = response.content;
 
+        debugger
         if (!this._status) {
             if (!this._titulo) {
                 this._titulo = "Atenção";

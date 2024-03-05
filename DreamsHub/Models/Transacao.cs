@@ -11,4 +11,9 @@ public class Transacao
     public Categoria Categoria { get; set; }
     public ETipoTransacao Tipo { get; set; }
     public EStatusTransacao Status { get; set; }
+
+    public Transacao()
+    {
+        this.Categoria = new Categoria();
+    }
 }
