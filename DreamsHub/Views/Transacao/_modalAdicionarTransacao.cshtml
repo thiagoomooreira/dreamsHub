@@ -15,14 +15,16 @@
                 <div class="input-field col s6">
                     <i class="material-icons prefix">attach_money</i>
                     @Html.TextBoxFor(l => l.Transacao.Valor,
-                        new { @class = "validate" })
+                        new { @class = "validate valorDecimal" })
                     @Html.LabelFor(l => l.Transacao.Valor, "Valor")
                 </div>
 
                 <div class="input-field col s6">
                     <i class="material-icons prefix">date_range</i>
-                    @Html.TextBoxFor(l => l.Transacao.Data,
-                        new { @class = "", type = "date" })
+                    
+                    <input id="Transacao_Data" name="Transacao.Data" type="date" value="@Model.Transacao.Data.ToString("yyyy-MM-dd")">
+                    @* @Html.TextBoxFor(l => l.Transacao.Data, *@
+                    @*     new { @class = "datepicker", type = "date", value= Model.Transacao.Data.ToString("yyyy-MM-dd")}) *@
                     @Html.LabelFor(l => l.Transacao.Data, "Data")
                 </div>
 
@@ -42,7 +44,7 @@
                 <div class="switch col s4" style="margin-top: 16px">
                     <label>
                         Pendente
-                        <input type="checkbox" id="campo-status" value="true" name="Transacao.Status">
+                        <input type="checkbox" id="campo-status" value="true" name="Transacao.Status" @(Model.Transacao.Status?"checked='true'":"")>
                         <span class="lever"></span>
                         Pago
                     </label>
@@ -50,7 +52,8 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="submit" class="modal-action waves-effect waves-green btn-flat">Salvar</button>
+            <button type="button" class="modal-action modal-close waves-effect waves-green btn-flat red-text" >Voltar</button>
+            <button type="submit" class="modal-action waves-effect waves-green btn-flat bold">Salvar</button>
         </div>
     }
 </div>
@@ -59,6 +62,10 @@
     $(document).ready(function(){
         $('select').formSelect();
         $('.datepicker').datepicker();
+        
+        $('.valorDecimal').mask('000.000.000.000.000,00', { reverse: true });
+        
+        M.updateTextFields();
         
         $("#form-transacao").submit(async function (e){
             e.preventDefault()
@@ -71,6 +78,7 @@
     
             if(response.Status()){
                 $(`#modal-adicionar-transacao`).modal('close');
+                $(`#div-tabela-transacoes`).html(response.View());
             }else{
                 response.Swal()
             }  

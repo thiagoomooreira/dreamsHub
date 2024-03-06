@@ -1,8 +1,7 @@
 using DreamsHub.Models;
 
-namespace DreamsHub.Dao.Interface;
+namespace DreamsHub.Repository.Interface;
 
-public interface ICategoriaRepository
+public interface ICategoriaRepository: IRepositoryBase<Categoria>
 {
-    public List<Categoria> BuscarTodos();
 }

@@ -1,46 +1,11 @@
-﻿using DreamsHub.Dao.Interface;
+﻿using DreamsHub.Context;
 using DreamsHub.Models;
 using DreamsHub.Models.Tipos;
+using DreamsHub.Repository.Interface;
 
-namespace DreamsHub.Dao;
+namespace DreamsHub.Repository;
 
-public class CategoriaRepository : ICategoriaRepository
+public class CategoriaRepository : RepositoryBase<Categoria>, ICategoriaRepository
 {
-    private static List<Categoria> _listaDeCategorias = new List<Categoria>();
-
-    public CategoriaRepository()
-    {
-        _listaDeCategorias = new List<Categoria>()
-        {
-            new()
-            {
-                Id = 1,
-                Descricao = "Financiamento",
-                Cor = ECoresCategoria.Azul
-            },
-            new()
-            {
-                Id = 2,
-                Descricao = "Lazer",
-                Cor = ECoresCategoria.Azul
-            },
-            new()
-            {
-                Id = 3,
-                Descricao = "Transporte",
-                Cor = ECoresCategoria.Azul
-            },
-            new()
-            {
-                Id = 3,
-                Descricao = "Outras",
-                Cor = ECoresCategoria.Azul
-            }
-        };   
-    }
-    
-    public List<Categoria> BuscarTodos()
-    {
-        return _listaDeCategorias;
-    }
+    public CategoriaRepository(ContextModel db) : base(db){}
 }

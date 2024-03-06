@@ -6,12 +6,22 @@ namespace DreamsHub.Repository;
 
 public class TransacaoRepository: RepositoryBase<Transacao>, ITransacaoRepository
 {
-    private static List<Transacao> _listaDeTransacoes = new List<Transacao>();
-
     public TransacaoRepository(ContextModel db) : base(db){}
     
-    public List<Transacao> BuscarTodos()
+    public IQueryable<Transacao> BuscarTodos()
     {
-        return _listaDeTransacoes;
+        return (from t in this.GerarIqueryable()
+            join c in Db.Categorias on t.CategoriaId equals c.Id
+            select new Transacao()
+            {
+                Id = t.Id,
+                Descricao = t.Descricao,
+                Categoria = c,
+                CategoriaId = t.CategoriaId,
+                Data = t.Data,
+                Status = t.Status,
+                Tipo = t.Tipo,
+                Valor = t.Valor
+            });
     }
 }

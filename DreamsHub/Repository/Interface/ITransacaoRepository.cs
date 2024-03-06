@@ -4,5 +4,5 @@ namespace DreamsHub.Repository.Interface;
 
 public interface ITransacaoRepository: IRepositoryBase<Transacao>
 {
-    public List<Transacao> BuscarTodos();
+    public IQueryable<Transacao> BuscarTodos();
 }

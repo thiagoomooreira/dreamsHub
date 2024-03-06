@@ -6,8 +6,7 @@
         this._view = response.view;
         this._functionJs = response.functionJs;
         this._content = response.content;
-
-        debugger
+        
         if (!this._status) {
             if (!this._titulo) {
                 this._titulo = "Atenção";

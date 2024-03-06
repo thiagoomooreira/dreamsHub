@@ -4,21 +4,18 @@ class AdicionarTransacao{
         let $main = $("#main");
 
         $main.on("click", "#button-adicionar-despesa", () => {this.abrirModalAdicionar()})
-        // $main.on("submit", "#form-adicionar-cliente", (e) => {
-        //     this.salvarCliente(e)
-        // })
+        
+        $main.on("click", ".button-editar-transacao", event => {
+            const codigo = $(event.target).closest('.button-editar-transacao').data("codigo")
 
-        // $main.on("click", ".button-editar-cliente", event => {
-        //     const codigo = $(event.target).closest('.button-editar-cliente').data("codigo")
-        //
-        //     this.abrirModalAdicionar(codigo)
-        // })
-        //
-        // $main.on("click", ".button-deletar-cliente", event => {
-        //     const codigo = $(event.target).closest('.button-deletar-cliente').data("codigo")
-        //
-        //     this.excluirCliente(codigo)
-        // })
+            this.abrirModalAdicionar(codigo)
+        })
+        
+        $main.on("click", ".button-deletar-transacao", event => {
+            const codigo = $(event.target).closest('.button-deletar-transacao').data("codigo")
+
+            this.excluirTransacao(codigo)
+        })
     }
 
     async abrirModalAdicionar(codigo = 0, tipo = "Despesa") {
@@ -29,7 +26,6 @@ class AdicionarTransacao{
             data: {codigo : codigo, tipo: tipo}
         }).Start());
 
-        debugger
         if(response.Status()){
             $("#div-modal-adicionar-transacao").html(response.View())
 
@@ -41,5 +37,35 @@ class AdicionarTransacao{
         }else{
             response.Swal()
         }
+    }
+
+    async excluirTransacao(codigo){
+
+        swal({
+            title: "Atenção",
+            text: "Deseja realmente excluir?",
+            icon: 'warning',
+            buttons: {
+                cancel: 'Não',
+                delete: {text:'Sim!',className:'red'}
+            }
+        }).then(async function (willDelete) {
+            if (!willDelete) {
+                return false;
+            }
+
+            const response = new ViewResponse(await new CustomAjax({
+                type: "POST",
+                url: "/Transacao/Excluir",
+                data: {codigo}
+            }).Start());
+
+            if(response.Status()){
+                $(`#div-tabela-transacoes`).html(response.View());
+            }
+            
+            response.Swal()
+        })
+        
     }
 }
