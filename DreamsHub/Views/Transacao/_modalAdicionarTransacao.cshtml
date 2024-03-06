@@ -1,4 +1,21 @@
-﻿@model DreamsHub.ViewModels.AdicionarTransacaoViewModel
+﻿@using DreamsHub.Models.Tipos
+@model DreamsHub.ViewModels.AdicionarTransacaoViewModel
+
+@{
+    string corTexto = "green";
+    if (Model.Transacao.Tipo == ETipoTransacao.Despesa.ToString())
+    {
+        corTexto = "red";
+    }
+}
+
+<style>
+
+    #modal-adicionar-transacao .material-icons{
+        color: @corTexto;
+    }
+    
+</style>
 
 <div id="modal-adicionar-transacao" class="modal modal-fixed-footer">
     @using (Html.BeginForm("Salvar", "Transacao", FormMethod.Get, 

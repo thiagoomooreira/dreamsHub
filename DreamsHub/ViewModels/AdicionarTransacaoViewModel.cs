@@ -17,9 +17,12 @@ public class AdicionarTransacaoViewModel
     
     public AdicionarTransacaoViewModel(ETipoTransacao tipo)
     {
-        this.Transacao = new TransacaoDto();
-
-        this.Transacao.Tipo = tipo.ToString();
+        this.Transacao = new TransacaoDto
+        {
+            Tipo = tipo.ToString(),
+            Data = DateTime.Now,
+            Status = true
+        };
     }
     
     public SelectList CategoriasDropdown()

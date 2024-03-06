@@ -3,12 +3,13 @@ class AdicionarTransacao{
     constructor() {
         let $main = $("#main");
 
-        $main.on("click", "#button-adicionar-despesa", () => {this.abrirModalAdicionar()})
+        $main.on("click", "#button-adicionar-despesa", () => {this.abrirModalAdicionar({})})
+        $main.on("click", "#button-adicionar-receita", () => {this.abrirModalAdicionar({tipo : "Receita"})})
         
         $main.on("click", ".button-editar-transacao", event => {
             const codigo = $(event.target).closest('.button-editar-transacao').data("codigo")
 
-            this.abrirModalAdicionar(codigo)
+            this.abrirModalAdicionar({codigo})
         })
         
         $main.on("click", ".button-deletar-transacao", event => {
@@ -18,8 +19,8 @@ class AdicionarTransacao{
         })
     }
 
-    async abrirModalAdicionar(codigo = 0, tipo = "Despesa") {
-        
+    async abrirModalAdicionar({codigo = 0, tipo = "Despesa"}) {
+
         const response = new ViewResponse(await new CustomAjax({
             type: "POST",
             url: "/Transacao/ModalAdicionarTransacao",

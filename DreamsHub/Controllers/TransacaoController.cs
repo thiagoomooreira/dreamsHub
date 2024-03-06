@@ -37,7 +37,7 @@ public class TransacaoController : Controller
     {
         try
         {
-            AdicionarTransacaoViewModel viewModel = new AdicionarTransacaoViewModel(tipo)
+            AdicionarTransacaoViewModel viewModel = new(tipo)
             {
                 Categorias = _categoriaRepository.GerarIqueryable().ToList(),
             };

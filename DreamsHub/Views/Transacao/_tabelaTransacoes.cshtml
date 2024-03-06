@@ -2,14 +2,26 @@
 @using DreamsHub.Models.Tipos
 @model DreamsHub.ViewModels.TransacaoViewModel
 
+<style>
+    .valor-transacao-receita{
+        color: green !important;
+        font-weight: bold;
+        font-size: 18px;
+    }
+    .valor-transacao-despesa{
+        color: red !important;
+        font-weight: bold;
+        font-size: 18px;
+    }
+</style>
 <div class="responsive-table">
     <table class="table invoice-data-table white border-radius-4 pt-1">
         <thead>
         <tr>
+            <th>Categoria</th>
             <th>Descrição</th>
             <th>Valor</th>
             <th>Data</th>
-            <th>Categoria</th>
             <th>Tipo</th>
             <th>Ações</th>
         </tr>
@@ -20,13 +32,16 @@
         @foreach (Transacao item in Model.Transacoes)
         {
             <tr>
-                <td>@item.Descricao</td>
-                <td>@item.Valor.ToString("C")</td>
-                <td>@item.Data.ToString("dd/MM")</td>
                 <td>
                     <span class="bullet blue"></span>
                     <span>@item.Categoria.Descricao</span>
                 </td>
+                <td>@item.Descricao</td>
+                <td class="@(item.Tipo == ETipoTransacao.Despesa ? "valor-transacao-despesa" : "valor-transacao-receita")">
+                    @item.Valor.ToString("C")
+                </td>
+                <td>@item.Data.ToString("dd/MM")</td>
+
                 <td>
                     @if (item.Status == EStatusTransacao.Efetuado)
                     {
@@ -38,11 +53,11 @@
                     }
                 </td>
                 <td>
-                    <a class="mr-4 blue-text tooltipped button-editar-transacao cursor-pointer" 
+                    <a class="mr-4 blue-text tooltipped button-editar-transacao cursor-pointer"
                        data-position="top" data-tooltip="Editar" data-codigo="@item.Id">
                         <i class="material-icons">edit</i>
                     </a>
-                    <a class="mr-4 red-text tooltipped button-deletar-transacao cursor-pointer" 
+                    <a class="mr-4 red-text tooltipped button-deletar-transacao cursor-pointer"
                        data-position="top" data-tooltip="Excluir" data-codigo="@item.Id">
                         <i class="material-icons">delete_sweep</i>
                     </a>
