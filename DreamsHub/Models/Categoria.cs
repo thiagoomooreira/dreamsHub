@@ -7,4 +7,5 @@ public class Categoria
     public int Id { get; set; }
     public string Descricao { get; set; }
     public ECoresCategoria Cor { get; set; }
+    public ETipoTransacao Tipo { get; set; }
 }

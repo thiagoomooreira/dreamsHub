@@ -3,7 +3,6 @@ using DreamsHub.Models.Dtos;
 using DreamsHub.Models.Infra;
 using DreamsHub.Models.Infra.ControllerComponent;
 using DreamsHub.Models.Tipos;
-using DreamsHub.Repository.Interface;
 using DreamsHub.Services.Interface;
 using DreamsHub.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -14,13 +13,14 @@ public class TransacaoController : Controller
 {
     private readonly IViewRenderService _viewRenderService;
     private readonly ITransacaoService _transacaoService;
-    private readonly ICategoriaRepository _categoriaRepository;
+    private readonly ICategoriaService _categoriaService;
 
-    public TransacaoController(IViewRenderService viewRenderService, ICategoriaRepository categoriaRepository, ITransacaoService transacaoService)
+    public TransacaoController(IViewRenderService viewRenderService, 
+        ITransacaoService transacaoService, ICategoriaService categoriaService)
     {
         _viewRenderService = viewRenderService;
-        _categoriaRepository = categoriaRepository;
         _transacaoService = transacaoService;
+        _categoriaService = categoriaService;
     }
     
     [HttpGet]
@@ -39,7 +39,7 @@ public class TransacaoController : Controller
         {
             AdicionarTransacaoViewModel viewModel = new(tipo)
             {
-                Categorias = _categoriaRepository.GerarIqueryable().ToList(),
+                Categorias = _categoriaService.BuscarTodos(tipo).ToList(),
             };
 
             if (codigo != 0)

@@ -18,6 +18,7 @@ builder.Services.AddTransient<IViewRenderService, ViewRenderService>();
 builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddTransient<ITransacaoRepository, TransacaoRepository>();
 builder.Services.AddTransient<ITransacaoService, TransacaoService>();
+builder.Services.AddTransient<ICategoriaService, CategoriaService>();
 
 WebApplication app = builder.Build();
 

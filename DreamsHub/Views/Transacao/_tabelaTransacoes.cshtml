@@ -33,7 +33,7 @@
         {
             <tr>
                 <td>
-                    <span class="bullet blue"></span>
+                    <span class="bullet cor-transacao-@item.Categoria.Cor.ToString().ToLower()"></span>
                     <span>@item.Categoria.Descricao</span>
                 </td>
                 <td>@item.Descricao</td>
@@ -54,7 +54,7 @@
                 </td>
                 <td>
                     <a class="mr-4 blue-text tooltipped button-editar-transacao cursor-pointer"
-                       data-position="top" data-tooltip="Editar" data-codigo="@item.Id">
+                       data-position="top" data-tooltip="Editar" data-codigo="@item.Id" data-tipo="@item.Tipo">
                         <i class="material-icons">edit</i>
                     </a>
                     <a class="mr-4 red-text tooltipped button-deletar-transacao cursor-pointer"

@@ -36,3 +36,15 @@ html{
 
 .btn-floating, .btn{background-color: #212121 !important;}
 .fixed-action-btn{bottom: 50px; right: 19px;}
+
+
+/* CORES REFERENTES AO CATEGORIA DE TRANSAÇÕES */
+.cor-transacao-azul{background-color: #1e88e5;}
+.cor-transacao-vermelho{background-color: #e53935;}
+.cor-transacao-laranjado{background-color: #fb8c00;}
+.cor-transacao-verde{background-color: #43a047;}
+.cor-transacao-roxo{background-color: #8e24aa;}
+.cor-transacao-preto{background-color: #000;}
+.cor-transacao-cinza{background-color: #757575;}
+.cor-transacao-rosa{background-color: #d81b60;}
+.cor-transacao-amarelo{background-color: #fdd835;}

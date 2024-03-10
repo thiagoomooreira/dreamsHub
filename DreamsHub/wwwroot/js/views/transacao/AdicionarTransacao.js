@@ -8,8 +8,9 @@ class AdicionarTransacao{
         
         $main.on("click", ".button-editar-transacao", event => {
             const codigo = $(event.target).closest('.button-editar-transacao').data("codigo")
+            const tipo = $(event.target).closest('.button-editar-transacao').data("tipo")
 
-            this.abrirModalAdicionar({codigo})
+            this.abrirModalAdicionar({codigo, tipo})
         })
         
         $main.on("click", ".button-deletar-transacao", event => {
