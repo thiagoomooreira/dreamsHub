@@ -14,13 +14,15 @@ public class TransacaoController : Controller
     private readonly IViewRenderService _viewRenderService;
     private readonly ITransacaoService _transacaoService;
     private readonly ICategoriaService _categoriaService;
+    private readonly ITotalizarTransacoesService _totalizarTransacoesService;
 
     public TransacaoController(IViewRenderService viewRenderService, 
-        ITransacaoService transacaoService, ICategoriaService categoriaService)
+        ITransacaoService transacaoService, ICategoriaService categoriaService, ITotalizarTransacoesService totalizarTransacoesService)
     {
         _viewRenderService = viewRenderService;
         _transacaoService = transacaoService;
         _categoriaService = categoriaService;
+        _totalizarTransacoesService = totalizarTransacoesService;
     }
     
     [HttpGet]
@@ -28,7 +30,8 @@ public class TransacaoController : Controller
     {
         return View(new TransacaoViewModel()
         {
-            Transacoes = _transacaoService.BuscarTodos().ToList()
+            Transacoes = _transacaoService.BuscarTodos().ToList(),
+            TotalizadorMensal = _totalizarTransacoesService.TotalizarTransacoesDoMes(DateTime.Now.Month, DateTime.Now.Year)
         });
     }
 

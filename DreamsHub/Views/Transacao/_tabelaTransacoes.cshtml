@@ -6,22 +6,31 @@
     .valor-transacao-receita{
         color: green !important;
         font-weight: bold;
-        font-size: 18px;
+        font-size: 16px;
     }
     .valor-transacao-despesa{
         color: red !important;
         font-weight: bold;
-        font-size: 18px;
+        font-size: 16px;
+    }
+    
+  
+    .cabecalho-table {
+        color: white !important;
+        border-radius:32px !important;
+        background-color: #424242 !important;
+        padding: 2px 40px;
+        font-size: 14px;
+        font-weight: bold;
     }
 </style>
 <div class="responsive-table">
-    <table class="table invoice-data-table white border-radius-4 pt-1">
+    <table class="table invoice-data-table white border-radius-4 pt-1 striped">
         <thead>
         <tr>
             <th>Categoria</th>
             <th>Descrição</th>
             <th>Valor</th>
-            <th>Data</th>
             <th>Tipo</th>
             <th>Ações</th>
         </tr>
@@ -29,8 +38,19 @@
 
         <tbody>
 
-        @foreach (Transacao item in Model.Transacoes)
+        @{
+            DateTime utimoDia = Model.Transacoes.FirstOrDefault()?.Data ?? DateTime.Now;
+        }
+        @foreach (Transacao item in Model.Transacoes.OrderByDescending(l=>l.Data))
         {
+            if (utimoDia.Date != item.Data.Date)
+            {
+                utimoDia = item.Data;
+                <tr>
+                    <td class="cabecalho-table" colspan="2">@item.Data.ToString("dd/MM/yyyy")</td>
+                </tr>
+            }
+            
             <tr>
                 <td>
                     <span class="bullet cor-transacao-@item.Categoria.Cor.ToString().ToLower()"></span>
@@ -40,8 +60,6 @@
                 <td class="@(item.Tipo == ETipoTransacao.Despesa ? "valor-transacao-despesa" : "valor-transacao-receita")">
                     @item.Valor.ToString("C")
                 </td>
-                <td>@item.Data.ToString("dd/MM")</td>
-
                 <td>
                     @if (item.Status == EStatusTransacao.Efetuado)
                     {

@@ -22,12 +22,13 @@ html{
 .card-title-page{
   background-color: #424242 ;
   border-radius: 20px;
-  padding: 20px !important;
+  padding: 24px !important;
   margin-top: 10px;
 }
 
 .card-title-page h4{
   color: white !important;
+  margin-bottom: 22px;
 }
 .card-title-page span{
   color: #f5f5f5;

@@ -7,9 +7,53 @@
     <div class="col s12">
         <div class="container">
             <div class="row ">
-                <div class="col s4 card-title-page">
+                <div class="col s3 card-title-page">
                     <h4 class="bold">Transações</h4>
                     <span>Home -> Transação</span>
+                </div>
+                @* <div class="col s12 m3"> *@
+                @*     <div class="card z-depth-2"> *@
+                @*         <div class="card-content"> *@
+                @*             <div class="row"> *@
+                @*                 <div class="col s12"> *@
+                @*                     <h4 class="card-title">Pie Chart</h4> *@
+                @*                 </div> *@
+                @*                 <div class="col s12"> *@
+                @*                     <div id="pie-chart-sample" class="center"></div> *@
+                @*                 </div> *@
+                @*             </div> *@
+                @*         </div> *@
+                @*     </div> *@
+                @* </div> *@
+                <div class="col s3">
+                    <div class="card">
+                        <div class="card-content center-align">
+                            <h4 class="m-0 green-text"><b>@Model.TotalizadorMensal.Receitas.ToString("C")</b></h4>
+                            <p>Total Receitas</p>
+                            <p class="green-text  mt-3"><i class="material-icons vertical-align-middle">arrow_drop_up</i>
+                                ---%</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s3">
+                    <div class="card">
+                        <div class="card-content center-align">
+                            <h4 class="m-0 red-text"><b>@Model.TotalizadorMensal.Despesas.ToString("C")</b></h4>
+                            <p>Total Despesas</p>
+                            <p class="green-text  mt-3"><i class="material-icons vertical-align-middle">arrow_drop_up</i>
+                                ---%</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s3">
+                    <div class="card">
+                        <div class="card-content center-align">
+                            <h4 class="m-0"><b>@Model.TotalizadorMensal.Saldo.ToString("C")</b></h4>
+                            <p>Balanço</p>
+                            <p class="green-text  mt-3"><i class="material-icons vertical-align-middle">arrow_drop_up</i>
+                                ---%</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -37,11 +81,21 @@
 
                 <!-- invoice list -->
                 <section class="invoice-list-wrapper section mt-0">
-                    @* <div class="card"> *@
-                    @*     <div class="card-content pt-2 "> *@
-                    @*         <h4>Filtro</h4> *@
-                    @*     </div> *@
-                    @* </div> *@
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="row">
+                                <div class="input-field col s2">
+                                    <i class="material-icons prefix">today</i>
+                                    <input type="text" class="datepicker" id="dataInicial">
+                                    <label for="dataInicial">Entre</label>
+                                </div>
+                                <div class="input-field col s2">
+                                    <input type="text" class="datepicker" id="dataFinal">
+                                    <label for="dataFinal">Até</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card">
                         <div class="card-content">
                             <div id="div-tabela-transacoes">
@@ -60,10 +114,20 @@
 <script src="~/Materialize/app-assets/vendors/data-tables/js/jquery.dataTables.min.js"></script>
 <script src="~/Materialize/app-assets/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js"></script>
 <script src="~/Materialize/app-assets/vendors/data-tables/js/datatables.checkboxes.min.js"></script>
+<script src="~/Materialize/app-assets/vendors/sparkline/jquery.sparkline.min.js"></script>
 <script src="~/js/views/transacao/AdicionarTransacao.js"></script>
 
 <script>
     $(document).ready(function (){
+        $(".datepicker").datepicker()
         new AdicionarTransacao()
+        
+        // $("#pie-chart-sample").sparkline([50, 60, 80, 110], {
+        //     type: 'pie',
+        //     width: '150',
+        //     height: '150',
+        //     //tooltipFormat: $.spformat('{{value}}', 'tooltip-class'),
+        //     sliceColors: ['#ab47bc', '#03a9f4', '#cddc39', '#ff7043',]
+        //   });
     })
 </script>

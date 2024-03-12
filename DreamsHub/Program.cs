@@ -19,6 +19,7 @@ builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddTransient<ITransacaoRepository, TransacaoRepository>();
 builder.Services.AddTransient<ITransacaoService, TransacaoService>();
 builder.Services.AddTransient<ICategoriaService, CategoriaService>();
+builder.Services.AddTransient<ITotalizarTransacoesService, TotalizarTransacoesService>();
 
 WebApplication app = builder.Build();
 
