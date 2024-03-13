@@ -16,7 +16,7 @@ public class TransacaoService: ITransacaoService
 
     public List<Transacao> BuscarTodos()
     {
-        var transacaos = _transacaoRepository.BuscarTodos().ToList();
+        List<Transacao> transacaos = _transacaoRepository.BuscarTodos().ToList();
 
         return transacaos;
     }

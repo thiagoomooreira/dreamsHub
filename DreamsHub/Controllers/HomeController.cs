@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using DreamsHub.Services.Interface;
 using DreamsHub.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,16 +7,19 @@ namespace DreamsHub.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly ITotalizarTransacoesService _totalizarTransacoesService;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ITotalizarTransacoesService totalizarTransacoesService)
     {
-        _logger = logger;
+        _totalizarTransacoesService = totalizarTransacoesService;
     }
 
     public IActionResult Index()
     {
-        return View();
+        return View(new HomeViewModel()
+        {
+            TotalizadorCategorias = _totalizarTransacoesService.TotalizarCategoriasDoMes(DateTime.Now.Month, DateTime.Now.Year)
+        });
     }
 
     public IActionResult Privacy()

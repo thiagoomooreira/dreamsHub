@@ -29,7 +29,7 @@ namespace DreamsHub.Context
                 .AddJsonFile("appsettings.json")
                 .Build();
         
-            var connectionString = configuration.GetConnectionString("banco");
+            string? connectionString = configuration.GetConnectionString("banco");
             optionsBuilder.UseSqlServer(connectionString);
         }
     }

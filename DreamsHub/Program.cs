@@ -11,7 +11,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-var connectionString = builder.Configuration.GetConnectionString("AppDb");
+string connectionString = builder.Configuration.GetConnectionString("AppDb");
 builder.Services.AddDbContext<ContextModel>(x => x.UseSqlServer(connectionString));
 
 builder.Services.AddTransient<IViewRenderService, ViewRenderService>();
