@@ -40,22 +40,22 @@ html{
 
 
 /* CORES REFERENTES AO CATEGORIA DE TRANSAÇÕES */
-.cor-transacao-azul{background-color: #1e88e5;}
-.cor-transacao-vermelho{background-color: #e53935;}
-.cor-transacao-laranjado{background-color: #fb8c00;}
-.cor-transacao-verde{background-color: #43a047;}
-.cor-transacao-roxo{background-color: #8e24aa;}
-.cor-transacao-preto{background-color: #000;}
-.cor-transacao-cinza{background-color: #757575;}
-.cor-transacao-rosa{background-color: #d81b60;}
-.cor-transacao-amarelo{background-color: #fdd835;}
+.cor-transacao-azul{background-color: #1e88e5 !important;}
+.cor-transacao-vermelho{background-color: #e53935 !important;}
+.cor-transacao-laranjado{background-color: #fb8c00 !important;}
+.cor-transacao-verde{background-color: #43a047 !important;}
+.cor-transacao-roxo{background-color: #8e24aa !important;}
+.cor-transacao-preto{background-color: #000 !important;}
+.cor-transacao-cinza{background-color: #757575 !important;}
+.cor-transacao-rosa{background-color: #d81b60 !important;}
+.cor-transacao-amarelo{background-color: #fdd835 !important;}
 
-.cor-texto-transacao-azul{color: #1e88e5;}
-.cor-texto-transacao-vermelho{color: #e53935;}
-.cor-texto-transacao-laranjado{color: #fb8c00;}
-.cor-texto-transacao-verde{color: #43a047;}
-.cor-texto-transacao-roxo{color: #8e24aa;}
-.cor-texto-transacao-preto{color: #000;}
-.cor-texto-transacao-cinza{color: #757575;}
-.cor-texto-transacao-rosa{color: #d81b60;}
-.cor-texto-transacao-amarelo{color: #fdd835;}
+.cor-texto-transacao-azul{color: #1e88e5 !important;}
+.cor-texto-transacao-vermelho{color: #e53935 !important;}
+.cor-texto-transacao-laranjado{color: #fb8c00 !important;}
+.cor-texto-transacao-verde{color: #43a047 !important;}
+.cor-texto-transacao-roxo{color: #8e24aa !important;}
+.cor-texto-transacao-preto{color: #000 !important;}
+.cor-texto-transacao-cinza{color: #757575 !important;}
+.cor-texto-transacao-rosa{color: #d81b60 !important;}
+.cor-texto-transacao-amarelo{color: #fdd835 !important;}

@@ -1,0 +1,40 @@
+﻿@using DreamsHub.Models
+@model DreamsHub.ViewModels.PlanejamentoViewModel
+
+<div class="row">
+    <div class="content-wrapper-before white"></div>
+    <div class="col s12">
+        <div class="container">
+            <div class="row">
+                <div class="col s3 card-title-page">
+                    <h4 class="bold">Planejamento</h4>
+                    <span>Home -> Planejamento</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="row">
+                                <ul class="collection">
+
+                                    @foreach (Categoria item in Model.Categorias)
+                                    {
+                                        <li class="collection-item avatar">
+                                            <i class="material-icons circle cor-transacao-@item.Cor.ToString().ToLower()"></i>
+                                            <span class="title">@item.Descricao</span>
+                                            @* <p>First Line <br> *@
+                                            @*     Second Line *@
+                                            @* </p> *@
+                                            <a href="#!" class="secondary-content"><h5>R$ 1000,00</h5></a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

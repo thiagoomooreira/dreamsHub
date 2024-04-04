@@ -30,8 +30,22 @@ public class TransacaoController : Controller
     {
         return View(new TransacaoViewModel()
         {
-            Transacoes = _transacaoService.BuscarTodos().ToList(),
+            Data = DateTime.Now,
             TotalizadorMensal = _totalizarTransacoesService.TotalizarTransacoesDoMes(DateTime.Now.Month, DateTime.Now.Year)
+        });
+    }
+
+    [HttpPost]
+    public JsonResult Filtro(FiltroTransacaoDto filtro)
+    {
+        string tabelaTransacoes = this.TabelaTransacoes(new FiltroTransacao(filtro));
+
+        return Json(new ViewResponse(tabelaTransacoes)
+        {
+            Content = new {
+                Mes = filtro.Data.ToString("MMMM").ToUpper(),
+                Data = filtro.Data.ToString("dd/MM/yyyy")
+            }
         });
     }
 
@@ -69,7 +83,7 @@ public class TransacaoController : Controller
         {
             _transacaoService.AdicionarOuAtualizar(transacao);
 
-            return Json(new ViewResponse(TabelaTransacoes())
+            return Json(new ViewResponse(TabelaTransacoes(new FiltroTransacao()))
             {
                 Mensagem = "Salvo com sucesso"
             });
@@ -87,7 +101,7 @@ public class TransacaoController : Controller
         {
             _transacaoService.Excluir(codigo);
 
-            return Json(new ViewResponse(TabelaTransacoes())
+            return Json(new ViewResponse(TabelaTransacoes(new FiltroTransacao()))
             {
                 Mensagem = "Excluído com sucesso"
             });
@@ -99,11 +113,11 @@ public class TransacaoController : Controller
     }
 
     
-    private string TabelaTransacoes()
+    private string TabelaTransacoes(FiltroTransacao filtro)
     {
         string renderToString = _viewRenderService.RenderToString(this, "_tabelaTransacoes", new TransacaoViewModel()
         {
-            Transacoes = _transacaoService.BuscarTodos().ToList()
+            Transacoes = _transacaoService.BuscarTodos(filtro).ToList()
         });
 
         return renderToString;

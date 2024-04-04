@@ -1,0 +1,6 @@
+﻿services:
+  dreamshub:
+    image: dreamshub
+    build:
+      context: .
+      dockerfile: DreamsHub/bin/Debug/net7.0/publish/wwwroot/js/jQuery-Mask-Plugin-master/Dockerfile

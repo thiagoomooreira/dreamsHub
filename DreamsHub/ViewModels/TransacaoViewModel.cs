@@ -7,4 +7,5 @@ public class TransacaoViewModel
 {
     public List<Transacao> Transacoes { get; set; }
     public TotalizadorMensalTransacaoesDto TotalizadorMensal { get; set; }
+    public DateTime Data { get; set; }
 }

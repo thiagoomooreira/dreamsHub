@@ -14,10 +14,19 @@ public class TransacaoService: ITransacaoService
         _transacaoRepository = transacaoRepository;
     }
 
-    public List<Transacao> BuscarTodos()
+    public IQueryable<Transacao> BuscarTodos()
     {
-        List<Transacao> transacaos = _transacaoRepository.BuscarTodos().ToList();
+        IQueryable<Transacao> transacaos = _transacaoRepository.BuscarTodos();
+        
+        return transacaos;
+    }
+    
+    public IQueryable<Transacao> BuscarTodos(FiltroTransacao filtro)
+    {
+        var transacaos = this.BuscarTodos();
 
+        transacaos = transacaos.Where(l => l.Data >= filtro.DataInicial && l.Data <= filtro.DataFinal);
+        
         return transacaos;
     }
 

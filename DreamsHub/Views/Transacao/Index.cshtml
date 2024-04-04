@@ -1,7 +1,12 @@
 ﻿@model DreamsHub.ViewModels.TransacaoViewModel
 
 <link rel="stylesheet" type="text/css" href="~/Materialize/app-assets/css/pages/app-invoice.min.css">
-
+<style>
+    .chip-mes-filtro{
+        width: 120px;
+        text-align: center;
+    }
+</style>
 <div class="row">
     <div class="content-wrapper-before white"></div>
     <div class="col s12">
@@ -68,24 +73,27 @@
                 <!-- invoice list -->
                 <section class="invoice-list-wrapper section mt-0">
                     <div class="card">
-                        <div class="card-content">
-                            <div class="row">
-                                <div class="input-field col s2">
-                                    <i class="material-icons prefix">today</i>
-                                    <input type="text" class="datepicker" id="dataInicial">
-                                    <label for="dataInicial">Entre</label>
-                                </div>
-                                <div class="input-field col s2">
-                                    <input type="text" class="datepicker" id="dataFinal">
-                                    <label for="dataFinal">Até</label>
+                        @using (Html.BeginForm("Filtro", "Transacao", FormMethod.Post, new {id = "form-filtro-transacao"}))
+                        {
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col s12 center">
+                                        <input type="hidden" name="Data" id="data-filtro" value="@Model.Data.ToString("dd/MM/yyyy")">
+                                        <input type="hidden" id="tipo-filtro" name="Tipo" value="@Model.Data.ToString("dd/MM/yyyy")">
+                                        <i class="material-icons cursor-pointer mr-1 alter-mouth" data-tipo="anterior">arrow_back</i>
+                                        <div class="chip grey darken-3 white-text chip-mes-filtro" id="nome-mes-filtro">
+                                            @Model.Data.ToString("MMMM")
+                                        </div>
+                                        <i class="material-icons cursor-pointer ml-1 alter-mouth" data-tipo="proximo">arrow_forward</i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        }
                     </div>
                     <div class="card">
                         <div class="card-content">
                             <div id="div-tabela-transacoes">
-                                @Html.Partial("_tabelaTransacoes", Model)
+                                @* @Html.Partial("_tabelaTransacoes", Model) *@
                             </div>
                         </div>
                     </div>
@@ -107,12 +115,33 @@
         $(".datepicker").datepicker()
         new AdicionarTransacao()
         
-        // $("#pie-chart-sample").sparkline([50, 60, 80, 110], {
-        //     type: 'pie',
-        //     width: '150',
-        //     height: '150',
-        //     //tooltipFormat: $.spformat('{{value}}', 'tooltip-class'),
-        //     sliceColors: ['#ab47bc', '#03a9f4', '#cddc39', '#ff7043',]
-        //   });
+        
+        
+        $(".alter-mouth").click(async function (){
+            let tipo = $(this).data("tipo");
+            
+            let $form = $("#form-filtro-transacao")
+            $form.find("#tipo-filtro").val(tipo)
+            
+            $form.submit()
+        })
+        
+        $("#form-filtro-transacao").submit(async function (e){
+            e.preventDefault()
+            
+            const response = new ViewResponse(await new CustomAjax({
+                type: "POST",
+                url: "/Transacao/Filtro",
+                data: $(this).serializeArray()
+            }).Start());
+            
+            if (response.Status()){
+                $("#div-tabela-transacoes").html(response.View())
+                $("#data-filtro").val(response.Content().data)
+                $("#nome-mes-filtro").text(response.Content().mes)
+            }
+        })
+        
+        $("#form-filtro-transacao").submit()
     })
 </script>

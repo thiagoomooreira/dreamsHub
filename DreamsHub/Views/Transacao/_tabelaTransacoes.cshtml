@@ -82,6 +82,13 @@
                 </td>
             </tr>
         }
+        
+        @if (Model.Transacoes.Count == 0)
+        {
+            <tr>
+                <td colspan="5" class="center">Nenhuma transação cadastrada!</td>
+            </tr>
+        }
         </tbody>
     </table>
 </div>
