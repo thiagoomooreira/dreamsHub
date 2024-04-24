@@ -1,4 +1,5 @@
 using DreamsHub.Models;
+using DreamsHub.Models.Context;
 using DreamsHub.Models.Tipos;
 
 namespace DreamsHub.Services.Interface;

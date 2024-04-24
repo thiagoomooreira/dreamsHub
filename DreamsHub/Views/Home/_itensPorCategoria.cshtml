@@ -1,0 +1,63 @@
+﻿@using DreamsHub.Models
+@using DreamsHub.Models.Context
+@using DreamsHub.Models.Tipos
+@model DreamsHub.ViewModels.ListaCategoriaViewModel
+
+<div id="modal-lista-transacao" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>Transação</h4>
+
+        <div class="row">
+
+            <table class="table table-bordered white border-radius-4 pt-1 striped">
+                <thead>
+                <tr>
+                    <th>Categoria</th>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                @{
+                    DateTime utimoDia = Model.Transacoes.FirstOrDefault()?.Data ?? DateTime.Now;
+                }
+                @foreach (Transacao item in Model.Transacoes.OrderByDescending(l => l.Data))
+                {
+                    if (utimoDia.Date != item.Data.Date)
+                    {
+                        utimoDia = item.Data;
+                        <tr>
+                            <td class="cabecalho-table" colspan="2">@item.Data.ToString("dd/MM/yyyy")</td>
+                        </tr>
+                    }
+
+                    <tr>
+                        <td>
+                            <span class="bullet cor-transacao-@item.Categoria.Cor.ToString().ToLower()"></span>
+                            <span>@item.Categoria.Descricao</span>
+                        </td>
+                        <td>@item.Descricao</td>
+                        <td class="@(item.Tipo == ETipoTransacao.Despesa ? "valor-transacao-despesa" : "valor-transacao-receita")">
+                            @item.Valor.ToString("C")
+                        </td>
+                    </tr>
+                }
+
+                @if (Model.Transacoes.Count == 0)
+                {
+                    <tr>
+                        <td colspan="5" class="center">Nenhuma transação cadastrada!</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="modal-action modal-close waves-effect waves-green btn-flat red-text">Voltar</button>
+    </div>
+</div>

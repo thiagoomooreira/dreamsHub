@@ -1,4 +1,5 @@
-﻿using DreamsHub.Models.Tipos;
+﻿using DreamsHub.Models.Context;
+using DreamsHub.Models.Tipos;
 
 namespace DreamsHub.Models.Dtos;
 

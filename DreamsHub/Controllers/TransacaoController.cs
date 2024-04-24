@@ -50,7 +50,7 @@ public class TransacaoController : Controller
     }
 
     [HttpPost]
-    public JsonResult ModalAdicionarTransacao(ETipoTransacao tipo, int codigo = 0)
+    public JsonResult ModalAdicionarTransacao(ETipoTransacao tipo, int codigo = 0, bool duplicar = false)
     {
         try
         {
@@ -60,7 +60,15 @@ public class TransacaoController : Controller
             };
 
             if (codigo != 0)
+            {
                 viewModel.Transacao = new TransacaoDto(_transacaoService.BuscarPeloCodigo(codigo));
+
+                if (duplicar)
+                {
+                    viewModel.Transacao.Id = 0;
+                    viewModel.Transacao.Data = viewModel.Transacao.Data.AddMonths(1);
+                }
+            }
 
             ViewResponse viewResponse = new ViewResponse(
                 this._viewRenderService.RenderToString(this, "_modalAdicionarTransacao", 

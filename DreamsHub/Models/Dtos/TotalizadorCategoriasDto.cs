@@ -1,4 +1,6 @@
-﻿namespace DreamsHub.Models.Dtos;
+﻿using DreamsHub.Models.Context;
+
+namespace DreamsHub.Models.Dtos;
 
 public class TotalizadorCategoriasDto
 {

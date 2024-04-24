@@ -1,0 +1,53 @@
+﻿@using DreamsHub.Models.Dtos
+@using DreamsHub.Models.Tipos
+@model DreamsHub.ViewModels.HomeViewModel
+
+<div class="row">
+    <div class="col s6">
+        <ul id="issues-collection" class="collection z-depth-1">
+            <li class="collection-item avatar">
+                <i class="material-icons red circle">money_off</i>
+                <h6 class="collection-header m-0">Despesas por Categoria</h6>
+                <p>@DateTime.Now.ToString(@"MMMM \de yyyy")</p>
+            </li>
+
+            @foreach (TotalizadorCategoriasDto item in Model.TotalizadorCategorias.Where(l => l.Categoria.Tipo == ETipoTransacao.Despesa))
+            {
+                <li class="collection-item item-categoria cursor-pointer" data-categoria="@item.Categoria.Id">
+                    <div class="row">
+                        <div class="col s6">
+                            <p class="collections-title font-weight-600 cor-texto-transacao-@item.Categoria.Cor.ToString().ToLower()">
+                                @item.Categoria.Descricao
+                            </p>
+                            <p class="collections-content">R$ 0,00 Planejado</p>
+                        </div>
+                        <div class="col s3">
+                            <span class="task-cat cor-transacao-@item.Categoria.Cor.ToString().ToLower()">@item.Total.ToString("C")</span>
+                        </div>
+                        <div class="col s3">
+                            <div class="progress">
+                                <div class="determinate" style="width: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+
+    </div>
+    <div class="col s12 m3">
+        <div class="card z-depth-2">
+            <div class="card-content">
+                <div class="row">
+                    <div class="col s12">
+                        <h4 class="card-title">Pie Chart</h4>
+                    </div>
+                    <div class="col s12">
+                        <div id="pie-chart-sample" class="center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

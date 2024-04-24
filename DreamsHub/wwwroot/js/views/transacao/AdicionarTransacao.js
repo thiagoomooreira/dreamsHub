@@ -12,6 +12,13 @@ class AdicionarTransacao{
 
             this.abrirModalAdicionar({codigo, tipo})
         })
+
+        $main.on("click", ".button-duplicar-transacao", event => {
+            const codigo = $(event.target).closest('.button-duplicar-transacao').data("codigo")
+            const tipo = $(event.target).closest('.button-duplicar-transacao').data("tipo")
+
+            this.abrirModalAdicionar({codigo, tipo, duplicar: true})
+        })
         
         $main.on("click", ".button-deletar-transacao", event => {
             const codigo = $(event.target).closest('.button-deletar-transacao').data("codigo")
@@ -20,12 +27,12 @@ class AdicionarTransacao{
         })
     }
 
-    async abrirModalAdicionar({codigo = 0, tipo = "Despesa"}) {
+    async abrirModalAdicionar({codigo = 0, tipo = "Despesa", duplicar = false}) {
 
         const response = new ViewResponse(await new CustomAjax({
             type: "POST",
             url: "/Transacao/ModalAdicionarTransacao",
-            data: {codigo : codigo, tipo: tipo}
+            data: {codigo : codigo, tipo: tipo, duplicar : duplicar}
         }).Start());
 
         if(response.Status()){

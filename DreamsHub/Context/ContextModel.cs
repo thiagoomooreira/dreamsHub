@@ -1,4 +1,5 @@
 ﻿using DreamsHub.Models;
+using DreamsHub.Models.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace DreamsHub.Context

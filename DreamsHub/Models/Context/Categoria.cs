@@ -1,6 +1,6 @@
 ﻿using DreamsHub.Models.Tipos;
 
-namespace DreamsHub.Models;
+namespace DreamsHub.Models.Context;
 
 public class Categoria
 {

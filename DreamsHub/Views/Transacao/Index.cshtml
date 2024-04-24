@@ -73,25 +73,30 @@
                 <!-- invoice list -->
                 <section class="invoice-list-wrapper section mt-0">
                     <div class="card">
-                        @using (Html.BeginForm("Filtro", "Transacao", FormMethod.Post, new {id = "form-filtro-transacao"}))
-                        {
-                            <div class="card-content">
-                                <div class="row">
-                                    <div class="col s12 center">
-                                        <input type="hidden" name="Data" id="data-filtro" value="@Model.Data.ToString("dd/MM/yyyy")">
-                                        <input type="hidden" id="tipo-filtro" name="Tipo" value="@Model.Data.ToString("dd/MM/yyyy")">
-                                        <i class="material-icons cursor-pointer mr-1 alter-mouth" data-tipo="anterior">arrow_back</i>
-                                        <div class="chip grey darken-3 white-text chip-mes-filtro" id="nome-mes-filtro">
-                                            @Model.Data.ToString("MMMM")
-                                        </div>
-                                        <i class="material-icons cursor-pointer ml-1 alter-mouth" data-tipo="proximo">arrow_forward</i>
-                                    </div>
-                                </div>
-                            </div>
-                        }
+                        
                     </div>
                     <div class="card">
                         <div class="card-content">
+                            
+                            <div class="row">
+                                @using (Html.BeginForm("Filtro", "Transacao", FormMethod.Post, new {id = "form-filtro-transacao"}))
+                                {
+                                    <div class="col s12">
+                                        <div class="row">
+                                            <div class="col s12 center">
+                                                <input type="hidden" name="Data" id="data-filtro" value="@Model.Data.ToString("dd/MM/yyyy")">
+                                                <input type="hidden" id="tipo-filtro" name="Tipo" value="@Model.Data.ToString("dd/MM/yyyy")">
+                                                <i class="material-icons cursor-pointer mr-1 alter-mouth" data-tipo="anterior">arrow_back</i>
+                                                <div class="chip grey darken-3 white-text chip-mes-filtro" id="nome-mes-filtro">
+                                                    @Model.Data.ToString("MMMM")
+                                                </div>
+                                                <i class="material-icons cursor-pointer ml-1 alter-mouth" data-tipo="proximo">arrow_forward</i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                
+                            </div>
                             <div id="div-tabela-transacoes">
                                 @* @Html.Partial("_tabelaTransacoes", Model) *@
                             </div>

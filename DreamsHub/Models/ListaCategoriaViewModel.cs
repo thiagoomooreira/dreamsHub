@@ -3,7 +3,7 @@ using DreamsHub.Models.Context;
 
 namespace DreamsHub.ViewModels;
 
-public class PlanejamentoViewModel
+public class ListaCategoriaViewModel
 {
-    public List<Categoria> Categorias { get; set; }
+    public List<Transacao> Transacoes { get; set; }
 }

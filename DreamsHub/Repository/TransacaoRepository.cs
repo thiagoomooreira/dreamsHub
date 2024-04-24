@@ -1,5 +1,6 @@
 ﻿using DreamsHub.Context;
 using DreamsHub.Models;
+using DreamsHub.Models.Context;
 using DreamsHub.Repository.Interface;
 
 namespace DreamsHub.Repository;

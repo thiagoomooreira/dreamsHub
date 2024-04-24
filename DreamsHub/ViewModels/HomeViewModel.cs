@@ -5,6 +5,7 @@ namespace DreamsHub.ViewModels;
 public class HomeViewModel
 {
     public List<TotalizadorCategoriasDto> TotalizadorCategorias { get; set; }
+    public string Mes { get; set; }
 
 
     // public List<decimal> teste()
