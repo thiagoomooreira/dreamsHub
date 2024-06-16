@@ -22,4 +22,10 @@ public class PlanejamentoController : Controller
             Categorias = _categoriaService.BuscarTodos(ETipoTransacao.Despesa)
         });
     }
+
+    [HttpGet]
+    public IActionResult Cadastrar()
+    {
+        return View(new PlanejamentoViewModel());
+    } 
 }

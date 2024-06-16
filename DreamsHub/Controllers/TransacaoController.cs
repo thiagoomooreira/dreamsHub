@@ -31,7 +31,7 @@ public class TransacaoController : Controller
         return View(new TransacaoViewModel()
         {
             Data = DateTime.Now,
-            TotalizadorMensal = _totalizarTransacoesService.TotalizarTransacoesDoMes(DateTime.Now.Month, DateTime.Now.Year)
+            // TotalizadorMensal = _totalizarTransacoesService.TotalizarTransacoesDoMes(DateTime.Now.Month, DateTime.Now.Year)
         });
     }
 
@@ -119,7 +119,6 @@ public class TransacaoController : Controller
             return Json(new ViewResponse(false, e.Message));
         }
     }
-
     
     private string TabelaTransacoes(FiltroTransacao filtro)
     {

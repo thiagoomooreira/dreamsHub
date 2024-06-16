@@ -39,9 +39,26 @@ public class TransacaoService: ITransacaoService
 
     public void AdicionarOuAtualizar(TransacaoDto transacao)
     {
-        Transacao converterParaModel = transacao.ConverterParaModel();
+        Transacao transacaoPrincipal = transacao.ConverterParaModel();
+        List<Transacao> converterParaModel = new()
+        {
+            transacaoPrincipal
+        };
+        
+        if (transacao.Parcelas > 1)
+        {
+            transacaoPrincipal.Descricao = $"{transacaoPrincipal.Descricao} (1x)"; 
+            for (int i = 2; i <= transacao.Parcelas; i++)
+            {
+                Transacao parcela = transacao.ConverterParaModel();
+                parcela.Data = parcela.Data.AddMonths(i-1);
+                parcela.Descricao = $"{parcela.Descricao} ({i}x)"; 
+                converterParaModel.Add(parcela);
+            }
+        }
 
-        _transacaoRepository.AdicionarOuAtualizar(converterParaModel);
+        foreach (Transacao item in converterParaModel)
+            _transacaoRepository.AdicionarOuAtualizar(item);
     }
 
     public void Excluir(int codigo)
@@ -50,5 +67,12 @@ public class TransacaoService: ITransacaoService
 
 
         _transacaoRepository.Excluir(buscarPeloCodigo);
+    }
+
+    public IQueryable<Transacao> BuscarPorCategoriaPorMes(int categoriaId, DateTime data)
+    {
+        return this.BuscarTodos().Where(l => l.CategoriaId == categoriaId &&
+                                             l.Data.Month == data.Month &&
+                                             l.Data.Year == data.Year);
     }
 }

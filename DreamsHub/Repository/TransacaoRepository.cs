@@ -25,4 +25,9 @@ public class TransacaoRepository: RepositoryBase<Transacao>, ITransacaoRepositor
                 Valor = t.Valor
             });
     }
+    
+    public IQueryable<Transacao> BuscarEntreDatas(DateTime dataInicial, DateTime dataFinal)
+    {
+        return this.GerarIqueryable().Where(l => l.Data >= dataInicial && l.Data <= dataFinal);
+    }
 }

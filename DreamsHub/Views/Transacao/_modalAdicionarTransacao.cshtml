@@ -45,11 +45,17 @@
                     @Html.LabelFor(l => l.Transacao.Data, "Data")
                 </div>
 
-                <div class="input-field col s12">
+                <div class="input-field col s9">
                     <i class="material-icons prefix">description</i>
                     @Html.TextBoxFor(l => l.Transacao.Descricao,
                         new { @class = "validate" })
                     @Html.LabelFor(l => l.Transacao.Descricao, "Descrição")
+                </div>
+                <div class="input-field col s3">
+                    <i class="material-icons prefix">credit_card</i>
+                    @Html.TextBoxFor(l => l.Transacao.Parcelas,
+                        new { @class = "validate", type = "number" })
+                    @Html.LabelFor(l => l.Transacao.Parcelas, "Parcelas")
                 </div>
                 <div class="input-field col s4">
                     <i class="material-icons prefix">mode_edit</i>
@@ -95,7 +101,7 @@
     
             if(response.Status()){
                 $(`#modal-adicionar-transacao`).modal('close');
-                $(`#div-tabela-transacoes`).html(response.View());
+                $("#form-filtro-transacao").submit()
             }else{
                 response.Swal()
             }  

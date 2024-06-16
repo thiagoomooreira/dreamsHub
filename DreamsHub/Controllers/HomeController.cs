@@ -32,12 +32,7 @@ public class HomeController : Controller
     [HttpPost]
     public JsonResult Filtro(string mes, string tipo)
     {
-        
-        string nomeMes = mes; // Ou qualquer outro mês
-        int anoAtual = DateTime.Now.Year;
-        
-        string dataString = $"01/{GetNumeroMes(nomeMes)}/{anoAtual}";
-        DateTime data = DateTime.ParseExact(dataString, "dd/MM/yyyy", null);
+        DateTime data = Tratamentos.ConverterMes(mes);
 
         data = tipo == "anterior" ? data.AddMonths(-1) : data.AddMonths(1);
 
@@ -57,18 +52,15 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public JsonResult ModalListaTransacao(int categoria)
+    public JsonResult ModalListaTransacao(int categoria, string mes)
     {
-        ListaCategoriaViewModel lista = new ListaCategoriaViewModel()
+        DateTime data = Tratamentos.ConverterMes(mes);
+
+        ListaCategoriaViewModel lista = new()
         {
-            Transacoes = _transacaoService.BuscarTodos().Where(l=>l.CategoriaId == categoria).ToList()
+            Transacoes = _transacaoService.BuscarPorCategoriaPorMes(categoria, data).ToList()
         };
         
         return Json(new ViewResponse(_viewRenderService.RenderToString(this, "_itensPorCategoria", lista)));
-    }
-    
-    static string GetNumeroMes(string nomeMes)
-    {
-        return DateTime.ParseExact(nomeMes, "MMMM", null).ToString("MM");
     }
 }

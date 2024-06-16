@@ -11,4 +11,5 @@ public interface ITransacaoService
     Transacao BuscarPeloCodigo(int codigo);
     void AdicionarOuAtualizar(TransacaoDto transacao);
     void Excluir(int codigo);
+    IQueryable<Transacao> BuscarPorCategoriaPorMes(int categoriaId, DateTime data);
 }

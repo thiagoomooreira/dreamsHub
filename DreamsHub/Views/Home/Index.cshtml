@@ -50,9 +50,13 @@
 <div id="div-modal-lista-transacao"></div>
 
 <script src="~/Materialize/app-assets/vendors/sparkline/jquery.sparkline.min.js"></script>
+<script src="~/js/views/Home/Home.js"></script>
 
 <script>
     $(document).ready(function (){
+        
+        new Home()
+        
         $(".alter-mouth").click(async function (){
             
             let tipo = $(this).data("tipo");
@@ -72,24 +76,6 @@
             }
         })
         
-        $(".item-categoria").click(async function (){
-            let categoria = $(this).data("categoria");
-            
-            const response = new ViewResponse(await new CustomAjax({
-                type: "POST",
-                url: "/Home/ModalListaTransacao",
-                data: {
-                    categoria    
-                }
-            }).Start());
-            
-            if (response.Status()){
-                $("#div-modal-lista-transacao").html(response.View())
-                
-                $(`#modal-lista-transacao`).modal();
-                $(`#modal-lista-transacao`).modal("open");
-              
-            }
-        })
+        
     })
 </script>

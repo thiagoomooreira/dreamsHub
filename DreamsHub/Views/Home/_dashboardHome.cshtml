@@ -19,7 +19,7 @@
                             <p class="collections-title font-weight-600 cor-texto-transacao-@item.Categoria.Cor.ToString().ToLower()">
                                 @item.Categoria.Descricao
                             </p>
-                            <p class="collections-content">R$ 0,00 Planejado</p>
+                            <p class="collections-content">@item.Media.ToString("C")</p>
                         </div>
                         <div class="col s3">
                             <span class="task-cat cor-transacao-@item.Categoria.Cor.ToString().ToLower()">@item.Total.ToString("C")</span>

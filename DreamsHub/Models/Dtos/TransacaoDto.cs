@@ -12,6 +12,7 @@ public class TransacaoDto
     public int Categoria { get; set; }
     public string Tipo { get; set; }
     public bool Status { get; set; }
+    public int Parcelas { get; set; }
 
     public TransacaoDto() { }
 
