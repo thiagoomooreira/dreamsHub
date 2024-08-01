@@ -1,0 +1,47 @@
+﻿@using DreamsHub.Models.Context
+@model DreamsHub.ViewModels.MetasViewModel
+
+<div class="responsive-table">
+    <table class="table invoice-data-table pt-1">
+        <thead>
+        <tr>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (Metas item in Model.Metas)
+        {
+            <tr>
+                <td class="indigo-text">@item.Descricao</td>
+                <td>
+                    @item.ValorTotal.ToString("C")
+                </td>
+                <td>
+                    <a class="mr-4 amber-text tooltipped button-editar-meta cursor-pointer"
+                       data-position="top" data-tooltip="Editar" data-codigo="@item.Id">
+                        <i class="material-icons">edit</i>
+                    </a>
+                    <a class="mr-4 blue-text tooltipped button-duplicar-meta cursor-pointer"
+                       data-position="top" data-tooltip="Duplicar" data-codigo="@item.Id">
+                        <i class="material-icons">content_copy</i>
+                    </a>
+                    <a class="mr-4 red-text tooltipped button-deletar-meta cursor-pointer"
+                       data-position="top" data-tooltip="Excluir" data-codigo="@item.Id">
+                        <i class="material-icons">delete_sweep</i>
+                    </a>
+                </td>
+            </tr>
+        }
+        
+        @if (Model.Metas.Count == 0)
+        {
+            <tr>
+                <td colspan="5" class="center">Nenhuma meta cadastrada!</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

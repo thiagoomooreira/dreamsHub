@@ -2,6 +2,16 @@
 @using DreamsHub.Models.Tipos
 @model DreamsHub.ViewModels.HomeViewModel
 
+<style>
+    .ct-series-a .ct-slice-donut{
+        stroke: #3f51b5 !important;
+    }
+    .ct-series-b .ct-slice-donut{
+        stroke: #f6f6f6 !important;
+    
+    }
+</style>
+
 <div class="row">
     <div class="col s6">
         <ul id="issues-collection" class="collection z-depth-1">
@@ -21,13 +31,8 @@
                             </p>
                             <p class="collections-content">@item.Media.ToString("C")</p>
                         </div>
-                        <div class="col s3">
+                        <div class="col s6">
                             <span class="task-cat cor-transacao-@item.Categoria.Cor.ToString().ToLower()">@item.Total.ToString("C")</span>
-                        </div>
-                        <div class="col s3">
-                            <div class="progress">
-                                <div class="determinate" style="width: 70%"></div>
-                            </div>
                         </div>
                     </div>
                 </li>
@@ -35,19 +40,47 @@
         </ul>
 
     </div>
-    <div class="col s12 m3">
-        <div class="card z-depth-2">
-            <div class="card-content">
-                <div class="row">
-                    <div class="col s12">
-                        <h4 class="card-title">Pie Chart</h4>
-                    </div>
-                    <div class="col s12">
-                        <div id="pie-chart-sample" class="center"></div>
-                    </div>
-                </div>
+    <div class="col s12 m6 l3 card-width">
+        <div class="card border-radius-6">
+            <div class="card-content center-align">
+                <i class="material-icons green-text small-ico-bg mb-5">attach_money</i>
+                <h4 class="m-0"><b>@Model.TotalReceitas.ToString("C")</b></h4>
+                <p>Recebidos</p>
+                <p class="green-text  mt-3"><i class="material-icons vertical-align-middle">arrow_drop_up</i>
+                    119.71%</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col s12 m6 l3 card-width">
+        <div class="card border-radius-6">
+            <div class="card-content center-align">
+                <i class="material-icons red-text small-ico-bg mb-5">money_off</i>
+                <h4 class="m-0"><b>@Model.TotalDespesas.ToString("C")</b></h4>
+                <p>Gastos</p>
+                <p class="green-text  mt-3"><i class="material-icons vertical-align-middle">arrow_drop_up</i>
+                    119.71%</p>
             </div>
         </div>
     </div>
 
+    @foreach (TotalizacaoMetas item in Model.TotalizadorMetas)
+    {
+        <div class="col s12 m3">
+            <!-- Current Balance -->
+            <div class="card animate fadeLeft">
+                <div class="card-content">
+                    <h6 class="mb-0 mt-0 display-flex justify-content-between">@item.Descricao
+                    </h6>
+                    <p class="medium-small">@item.Meta.ToString("C")</p>
+                    <div class="current-balance-container">
+                        <div id="current-balance-donut-chart-@item.Id" class="current-balance-shadow"></div>
+                    </div>
+                    <h5 class="center-align">@item.Valor.ToString("C")</h5>
+                    @* <p class="medium-small center-align">Used balance this billing cycle</p> *@
+                </div>
+            </div>
+        </div>   
+    }
+    
 </div>

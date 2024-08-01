@@ -3,36 +3,36 @@ html{
   font-size: 16px;
 }
 
-.card{
-  border-radius: 20px;
-}
-.card-content{
-  background-color: #f5f5f5;
-  border-radius: 20px !important;
-}
+/*.card{*/
+/*  border-radius: 20px;*/
+/*}*/
+/*.card-content{*/
+/*  background-color: #f5f5f5;*/
+/*  border-radius: 20px !important;*/
+/*}*/
 
-.table{
-  background-color: #f5f5f5 !important;
-}
+/*.table{*/
+/*  background-color: #f5f5f5 !important;*/
+/*}*/
 
-.table th{color: #212121;font-weight: bold}
-.table td{color: #424242;}
+/*.table th{color: #212121;font-weight: bold}*/
+/*.table td{color: #424242;}*/
 
 
-.card-title-page{
-  background-color: #424242 ;
-  border-radius: 20px;
-  padding: 24px !important;
-  margin-top: 10px;
-}
+/*.card-title-page{*/
+/*  background-color: #424242 ;*/
+/*  border-radius: 20px;*/
+/*  padding: 24px !important;*/
+/*  margin-top: 10px;*/
+/*}*/
 
-.card-title-page h4{
-  color: white !important;
-  margin-bottom: 22px;
-}
-.card-title-page span{
-  color: #f5f5f5;
-}
+/*.card-title-page h4{*/
+/*  color: white !important;*/
+/*  margin-bottom: 22px;*/
+/*}*/
+/*.card-title-page span{*/
+/*  color: #f5f5f5;*/
+/*}*/
 
 .cabecalho-table {
   color: white !important;
@@ -68,3 +68,15 @@ html{
 .cor-texto-transacao-cinza{color: #757575 !important;}
 .cor-texto-transacao-rosa{color: #d81b60 !important;}
 .cor-texto-transacao-amarelo{color: #fdd835 !important;}
+
+
+.modal.left-sheet {
+  float: right;
+  left: auto;
+  width: 60%;
+  height: 100%;
+  max-height: 100%;
+  margin: 0;
+  border-radius: 0;
+  will-change: top,opacity;
+}

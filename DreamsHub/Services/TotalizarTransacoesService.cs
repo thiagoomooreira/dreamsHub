@@ -1,4 +1,5 @@
-﻿using DreamsHub.Models;
+﻿using System.Diagnostics.CodeAnalysis;
+using DreamsHub.Models;
 using DreamsHub.Models.Context;
 using DreamsHub.Models.Dtos;
 using DreamsHub.Models.Infra;
@@ -30,7 +31,7 @@ public class TotalizarTransacoesService: ITotalizarTransacoesService
             Receitas = transacoes.Where(l => l.Tipo == ETipoTransacao.Receita).Sum(l => l.Valor)
         };
     }
-
+    
     public List<TotalizadorCategoriasDto> TotalizarCategoriasDoMes(int mes, int ano)
     {
         List<TotalizadorCategoriasDto> totalizadorCategoriasDtos = new List<TotalizadorCategoriasDto>();
@@ -38,28 +39,28 @@ public class TotalizarTransacoesService: ITotalizarTransacoesService
             .Where(l=>l.Data.Date.Month == mes && l.Data.Date.Year == ano).ToList();
 
         DateTime dataMediaFinal = new DateTime(ano, mes, 1).AddMonths(-1);
-        DateTime dataMediaInicial = dataMediaFinal.AddMonths(-6);
+        DateTime dataMediaInicial = dataMediaFinal.AddMonths(-3);
 
-        IQueryable<Transacao> ultimosSeisMeses = _transacaoRepository.BuscarEntreDatas(dataMediaInicial, dataMediaFinal);
+        IQueryable<Transacao> ultimosTresMeses = _transacaoRepository.BuscarEntreDatas(dataMediaInicial, dataMediaFinal);
         
         foreach (Categoria categoria in _categoriaRepository.GerarIqueryable().ToList())
         {
-            IQueryable<Transacao> ultimosSeisMesesPorCategoria = ultimosSeisMeses.Where(l => l.CategoriaId == categoria.Id);
+            IQueryable<Transacao> ultimosTrezMesesPorCategoria = ultimosTresMeses.Where(l => l.CategoriaId == categoria.Id);
 
             
-            List<Transacao> list = ultimosSeisMesesPorCategoria.ToList();
+            List<Transacao> list = ultimosTrezMesesPorCategoria.ToList();
             TotalizadorCategoriasDto totalizador = new()
             {
                 Categoria = categoria,
                 Total = transacaos.Where(l=>l.CategoriaId == categoria.Id).Sum(l=>l.Valor),
             };
 
-            if (ultimosSeisMesesPorCategoria.Any())
+            if (ultimosTrezMesesPorCategoria.Any())
             {
                 List<decimal> listaAgrupada = new();
                 for (DateTime data = dataMediaInicial; data.Date < dataMediaFinal.Date; data = data.AddMonths(1))
                 {
-                    listaAgrupada.Add(ultimosSeisMesesPorCategoria.Where(l=>l.Data.Month == data.Month && l.Data.Year == data.Year)
+                    listaAgrupada.Add(ultimosTrezMesesPorCategoria.Where(l=>l.Data.Month == data.Month && l.Data.Year == data.Year)
                         .Sum(l=>l.Valor));
                 }
                 totalizador.Media = listaAgrupada.Where(l=>l != 0)

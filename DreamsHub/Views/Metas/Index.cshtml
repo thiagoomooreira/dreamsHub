@@ -1,0 +1,67 @@
+﻿@model DreamsHub.ViewModels.MetasViewModel
+
+<link rel="stylesheet" type="text/css" href="~/Materialize/app-assets/css/pages/app-invoice.min.css">
+
+<div class="row">
+    <div class="content-wrapper-before black"></div>
+    <div class="col s12">
+        <div class="container">
+            <div class="row">
+                <div class="fixed-action-btn direction-top">
+                    <a class="btn-floating btn-large" id="button-adicionar-meta">
+                        <i class="material-icons">add</i>
+                    </a>
+                </div>
+
+                <!-- invoice list -->
+                <section class="invoice-list-wrapper section mt-0">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="row">
+                                <div class="col m6 s12">
+                                    <h4 class="indigo-text">Metas</h4>
+                                    <span>Objetivos financeiros</span>
+                                </div>
+                            </div>
+                            @* <div class="row"> *@
+                            @*     @using (Html.BeginForm("Filtro", "Transacao", FormMethod.Post, new {id = "form-filtro-transacao"})) *@
+                            @*     { *@
+                            @*         <div class="col s12"> *@
+                            @*             <div class="row"> *@
+                            @*                 <div class="col s12 center"> *@
+                            @*                     <input type="hidden" name="Data" id="data-filtro" value="@Model.Data.ToString("dd/MM/yyyy")"> *@
+                            @*                     <input type="hidden" id="tipo-filtro" name="Tipo" value="@Model.Data.ToString("dd/MM/yyyy")"> *@
+                            @*                     <i class="material-icons cursor-pointer mr-1 alter-mouth" data-tipo="anterior">arrow_back</i> *@
+                            @*                     <div class="chip grey darken-3 white-text chip-mes-filtro" id="nome-mes-filtro"> *@
+                            @*                         @Model.Data.ToString("MMMM") *@
+                            @*                     </div> *@
+                            @*                     <i class="material-icons cursor-pointer ml-1 alter-mouth" data-tipo="proximo">arrow_forward</i> *@
+                            @*                 </div> *@
+                            @*             </div> *@
+                            @*         </div> *@
+                            @*     } *@
+                            @*      *@
+                            @* </div> *@
+                            <div id="div-tabela-meta">
+                                @Html.Partial("_tabelaMetas", Model)
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="div-modal-adicionar-meta"></div>
+
+<script src="~/Materialize/app-assets/vendors/data-tables/js/jquery.dataTables.min.js"></script>
+<script src="~/Materialize/app-assets/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js"></script>
+<script src="~/Materialize/app-assets/vendors/data-tables/js/datatables.checkboxes.min.js"></script>
+<script src="~/js/views/meta/AdicionarMeta.js"></script>
+
+<script>
+    $(document).ready(function (){
+        new AdicionarMeta();
+    })
+</script>

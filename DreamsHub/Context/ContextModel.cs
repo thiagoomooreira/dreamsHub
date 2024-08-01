@@ -13,15 +13,11 @@ namespace DreamsHub.Context
         {
             Configuration = configuration;
         }
-
-        // protected override void OnConfiguring(DbContextOptionsBuilder options)
-        // {
-        //     // connect to sql server with connection string from app settings
-        //     options.UseSqlServer(Configuration.GetConnectionString("banco"));
-        // }
         
         public DbSet<Transacao> Transacoes { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<Metas> Metas { get; set; }
+        public DbSet<MovimentacaoMeta> MovimentacaoMetas { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

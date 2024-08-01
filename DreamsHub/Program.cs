@@ -17,8 +17,10 @@ builder.Services.AddDbContext<ContextModel>(x => x.UseSqlServer(connectionString
 builder.Services.AddTransient<IViewRenderService, ViewRenderService>();
 builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddTransient<ITransacaoRepository, TransacaoRepository>();
+builder.Services.AddTransient<ITMetasRepository, MetasRepository>();
 builder.Services.AddTransient<ITransacaoService, TransacaoService>();
 builder.Services.AddTransient<ICategoriaService, CategoriaService>();
+builder.Services.AddTransient<IMetasService, MetasServices>();
 builder.Services.AddTransient<ITotalizarTransacoesService, TotalizarTransacoesService>();
 
 WebApplication app = builder.Build();

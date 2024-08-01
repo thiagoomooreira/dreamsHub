@@ -1,0 +1,51 @@
+﻿@model DreamsHub.ViewModels.MetasViewModel
+
+@{
+    Layout = null;
+}
+<div id="modal-adicionar-meta" class="modal bottom-sheet left-sheet">
+    
+    @using (Html.BeginForm("", "", FormMethod.Post, new {@id = "form-adicionar-meta"}))
+    {
+        @Html.HiddenFor(l=>l.Meta.Id)
+        
+        <div class="modal-content">
+            <div class="row">
+                <div class="col s12">
+                    <h4>Meta</h4>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">person</i>
+                    @Html.TextBoxFor(l => l.Meta.Descricao, new {required="true"})
+                    @Html.LabelFor(l => l.Meta.Descricao, "Descrição")
+                </div>
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">attach_money</i>
+                    @Html.TextBoxFor(l => l.Meta.ValorTotal, new {required="true"})
+                    @Html.LabelFor(l => l.Meta.ValorTotal, "Meta")
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col s12">
+                    @Html.Partial("_tabelaMovimentacoesMetas", Model)
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="waves-effect waves-light btn red modal-close">Fechar</a>
+            <button type="submit" class="waves-effect waves-light btn">Salvar</button>
+        </div>
+    }
+</div>
+
+<script src="~/Js/Infra/BuscaCep.js"></script>
+<script >
+    $(document).ready(function (){
+        // M.updateTextFields();
+    })
+</script>

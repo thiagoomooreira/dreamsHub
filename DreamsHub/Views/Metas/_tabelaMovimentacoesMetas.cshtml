@@ -1,0 +1,33 @@
+﻿@using DreamsHub.Models.Context
+@model DreamsHub.ViewModels.MetasViewModel
+
+<div class="responsive-table">
+    <table class="table invoice-data-table pt-1">
+        <thead>
+        <tr>
+            <th>Data</th>
+            <th>Valor</th>
+            @* <th>Ações</th> *@
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (MovimentacaoMeta item in Model.Movimentacoes)
+        {
+            <tr>
+                <td class="indigo-text">@item.Data.ToString("dd/MM/yyyy")</td>
+                <td>
+                    @item.Valor.ToString("C")
+                </td>
+            </tr>
+        }
+        
+        @if (Model.Movimentacoes.Count == 0)
+        {
+            <tr>
+                <td colspan="5" class="center">Nenhuma movimentação cadastrada!</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

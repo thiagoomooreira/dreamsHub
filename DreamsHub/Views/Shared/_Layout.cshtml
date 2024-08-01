@@ -96,12 +96,17 @@
         </li>
         <li class="bold">
             <a class="waves-effect waves-cyan " href="@Url.Action("Index", "Transacao")">
-                <i class="material-icons">timeline</i><span class="menu-title">Transações</span>
+                <i class="material-icons">toc</i><span class="menu-title">Transações</span>
             </a>
         </li>
         <li class="bold">
             <a class="waves-effect waves-cyan " href="@Url.Action("Index", "Planejamento")">
                 <i class="material-icons">assessment</i><span class="menu-title">Planejamento</span>
+            </a>
+        </li>
+        <li class="bold">
+            <a class="waves-effect waves-cyan " href="@Url.Action("Index", "Metas")">
+                <i class="material-icons">timeline</i><span class="menu-title">Metas</span>
             </a>
         </li>
         
@@ -115,6 +120,7 @@
 
 
 <div id="main" class="main-full">
+    <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
     @RenderBody()
 </div>
 
